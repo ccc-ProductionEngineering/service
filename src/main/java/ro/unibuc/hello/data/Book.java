@@ -1,6 +1,5 @@
-package main.java.ro.unibuc.hello.data;
+package ro.unibuc.hello.data;
 
-import java.io.Reader;
 import java.time.LocalDate;
 
 import org.springframework.data.annotation.Id;
@@ -12,18 +11,18 @@ public class Book {
     private String id;
     private String title;
     private String author;
-    private Genre genre;
-    private Availability availability;
+    private String genre;
+    private String availability;
     private Reader borrower;
     private Reader reserver;
     private LocalDate reservationDate;
     private LocalDate borrowDate;
 
-    public Book(String title, String author, Genre genre) {
+    public Book(String title, String author, String genre) {
         this.title = title;
         this.author = author;
         this.genre = genre;
-        this.availability = Availability.AVAILABLE;
+        this.availability = "Available";
         this.reserver = null;
     }
 
@@ -36,7 +35,7 @@ public class Book {
         return author;
     }
 
-    public Genre getGenre() {
+    public String getGenre() {
         return genre;
     }
 
@@ -44,15 +43,15 @@ public class Book {
         return reserver;
     }
 
-    public void setGenre(Genre genre) {
+    public void setGenre(String genre) {
         this.genre = genre;
     }
 
-    public void setAvailability(Availability availability) {
+    public void setAvailability(String availability) {
         this.availability = availability;
     }
 
-    public Availability getAvailability() {
+    public String getAvailability() {
         return availability;
     }
 
