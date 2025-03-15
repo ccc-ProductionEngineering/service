@@ -18,7 +18,7 @@ public class Librarian {
         this.name = name;
         this.email = email;
         this.password = password;
-        this.role = "librarian"; // Setează automat rolul
+        this.role = "ADMIN";
     }
 
     // Getteri și setteri

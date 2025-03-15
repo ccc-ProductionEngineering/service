@@ -16,7 +16,7 @@ import org.springframework.stereotype.Repository;
 public interface BookRepository extends MongoRepository<Book, String> {
 
     // Optional<Book> findById(String id);
-    // List<Book> findByTitle(String title);
+    List<Book> findByTitle(String title);
     // List<Book> findByAuthor(String author);
     // List<Book> findByGenre(String genre);
 

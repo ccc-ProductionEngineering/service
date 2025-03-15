@@ -43,6 +43,19 @@ public class JwtUtil {
                 .getSubject();
     }
 
+    public String extractRole(String token) {
+        SecretKey secret = Keys.hmacShaKeyFor(Decoders.BASE64.decode(SECRET_KEY));
+
+        return Jwts.parser() // Folosește parserBuilder() pentru a crea un parser
+                .verifyWith(secret)
+                .build()
+                .parseSignedClaims(token)
+                .getPayload()
+                .get("roles").toString();
+    
+        // return claims.get("roles", String.class); // Assuming the role is stored as a string
+    }
+
 
     public boolean validateToken(String token, UserDetails userDetails) {
         return extractEmail(token).equals(userDetails.getUsername()) && !isTokenExpired(token);

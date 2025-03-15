@@ -1,6 +1,7 @@
 package ro.unibuc.hello.config;
 
 import ro.unibuc.hello.service.*;
+import lombok.extern.slf4j.Slf4j;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import jakarta.servlet.FilterChain;
@@ -14,6 +15,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.authority.AuthorityUtils;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.authentication.WebAuthenticationDetailsSource;
 import org.springframework.stereotype.Component;
@@ -25,7 +27,9 @@ import java.util.List;
 
 import static ro.unibuc.hello.config.JwtUtil.SECRET_KEY;
 
+
 @Component
+@Slf4j
 public class JwtRequestFilter extends OncePerRequestFilter {
     @Autowired
     private JwtUtil jwtUtil;
@@ -46,6 +50,7 @@ public class JwtRequestFilter extends OncePerRequestFilter {
 
             // Extrage email-ul din token
             String email = jwtUtil.extractEmail(token);
+            String role = jwtUtil.extractRole(token);
 
             // Dacă există utilizatorul în contextul Spring Security, nu face nimic
             if (email != null && SecurityContextHolder.getContext().getAuthentication() == null) {
@@ -60,8 +65,9 @@ public class JwtRequestFilter extends OncePerRequestFilter {
                             .build();
                 // Dacă token-ul este valid, setează autentificarea în contextul de securitate
                     if (jwtUtil.validateToken(token, userDetails)) {
+                        List<GrantedAuthority> authorities = AuthorityUtils.createAuthorityList("ROLE_" + role);
                             var authentication = new UsernamePasswordAuthenticationToken(
-                                    userDetails, null, userDetails.getAuthorities());
+                                    userDetails, null, authorities);
                             authentication.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
                             SecurityContextHolder.getContext().setAuthentication(authentication);
                     }
@@ -72,8 +78,9 @@ public class JwtRequestFilter extends OncePerRequestFilter {
                     .build();
                     // Dacă token-ul este valid, setează autentificarea în contextul de securitate
                         if (jwtUtil.validateToken(token, userDetails)) {
+                            List<GrantedAuthority> authorities = AuthorityUtils.createAuthorityList("ROLE_" + role);
                             var authentication = new UsernamePasswordAuthenticationToken(
-                                    userDetails, null, userDetails.getAuthorities());
+                                    userDetails, null, authorities);
                             authentication.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
                             SecurityContextHolder.getContext().setAuthentication(authentication);
                         }

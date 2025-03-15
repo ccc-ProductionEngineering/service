@@ -7,4 +7,5 @@ import java.util.List;
 public interface RentRepository extends MongoRepository<Rent, String> {
     List<Rent> findByIdReader(String idReader);
     List<Rent> findByIdBook(String idBook);
+    List<Rent> findByIdReaderAndIdBook(String idReader, String idBook);
 }

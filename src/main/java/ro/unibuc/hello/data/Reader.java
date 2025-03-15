@@ -21,7 +21,7 @@ public class Reader {
         this.name = name;
         this.email = email;
         this.password = password;
-        this.role = "reader";
+        this.role = "USER";
     }
 
     // Getteri și setteri

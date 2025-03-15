@@ -17,12 +17,11 @@ public class Book {
 
     public Book() {}
 
-    public Book(String title, String author, String genre, String availability, List<Reader> reservers) {
+    public Book(String title, String author, String genre, String availability) {
         this.title = title;
         this.author = author;
         this.genre = genre;
         this.availability = availability;
-        this.reservers = reservers;
     }
 
     // Getteri și setteri

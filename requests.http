@@ -61,7 +61,7 @@ Content-Type: application/json
 {
   "name": "nume_utilizator",
   "password": "parola_utilizator",
-  "email": "1@exemplu.com"
+  "email": "email1@exemplu.com"
 }
 
 //register librarians
@@ -75,7 +75,44 @@ Content-Type: application/json
   "email": "email2@exemplu.com"
 }
 
-//login
+//login reader
 
 POST http://localhost:8080/auth/login?email=email@exemplu.com&password=parola_utilizator
 
+//login librarian
+
+POST http://localhost:8080/auth/login?email=email2@exemplu.com&password=parola
+
+//add book by librarian
+
+POST http://localhost:8080/books/add
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJyb2xlcyI6IkFETUlOIiwic3ViIjoiZW1haWwyQGV4ZW1wbHUuY29tIiwiaWF0IjoxNzQyMDU4MDk4LCJleHAiOjE3NDIwOTQwOTh9.F_ictLyD4ovO8sFvIZPy4vgIM9uMUoFF_ZfCqb51ka4
+Content-Type: application/json
+
+{
+  "title": "Hunger Games",
+  "author": "Suzanne Collins",
+  "genre": "Fiction",
+  "availability": "AVAILABLE"
+}
+
+//rent book by book id
+
+POST http://localhost:8080/rent?bookId=67d5b2c57fcdff5948f08903
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJyb2xlcyI6IlVTRVIiLCJzdWIiOiJlbWFpbEBleGVtcGx1LmNvbSIsImlhdCI6MTc0MjA2NDk1OSwiZXhwIjoxNzQyMTAwOTU5fQ.Ow9Q6ZhZnWNEROk3QZGQCUc0lvlq4E6N8J1t1cPDHIM
+
+//rent book by title
+//not working
+
+POST http://localhost:8080/rentbytitle
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJyb2xlcyI6IlVTRVIiLCJzdWIiOiJlbWFpbEBleGVtcGx1LmNvbSIsImlhdCI6MTc0MjA2NDk1OSwiZXhwIjoxNzQyMTAwOTU5fQ.Ow9Q6ZhZnWNEROk3QZGQCUc0lvlq4E6N8J1t1cPDHIM
+Content-Type: application/json
+
+{
+  "title": "Hunger Games"
+}
+
+// return book
+
+POST http://localhost:8080/return?bookId=67d5b2c57fcdff5948f08903
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJyb2xlcyI6IlVTRVIiLCJzdWIiOiJlbWFpbEBleGVtcGx1LmNvbSIsImlhdCI6MTc0MjA2NDk1OSwiZXhwIjoxNzQyMTAwOTU5fQ.Ow9Q6ZhZnWNEROk3QZGQCUc0lvlq4E6N8J1t1cPDHIM

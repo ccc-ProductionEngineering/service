@@ -32,7 +32,7 @@ public class AuthService {
         if (readerRepository.existsByEmail(reader.getEmail()) || librarianRepository.existsByEmail(reader.getEmail())) {
             return "Email already exists!";
         }
-        Reader readerSave = new Reader(reader.getName(), reader.getEmail(), passwordEncoder.encode(reader.getPassword()), "reader");
+        Reader readerSave = new Reader(reader.getName(), reader.getEmail(), passwordEncoder.encode(reader.getPassword()), "USER");
         readerRepository.save(readerSave);
         return "Reader registered successfully!";
     }
@@ -41,7 +41,7 @@ public class AuthService {
         if (readerRepository.existsByEmail(librarian.getEmail()) || librarianRepository.existsByEmail(librarian.getEmail())) {
             return "Email already exists!";
         }
-        Librarian librarianSave = new Librarian(librarian.getName(), librarian.getEmail(), passwordEncoder.encode(librarian.getPassword()), "librarian");
+        Librarian librarianSave = new Librarian(librarian.getName(), librarian.getEmail(), passwordEncoder.encode(librarian.getPassword()), "ADMIN");
         librarianRepository.save(librarianSave);
         return "Librarian registered successfully!";
     }
