@@ -9,6 +9,7 @@
 ### Hello world endpoint: get response "Hello, Stranger!"
 GET http://localhost:8080/hello-world
 
+
 ### Hello world with a request param passed.
 # When sending the request it will ask you for the name
 # hitting enter will avoid passing the param, and do the default behaviour above
@@ -51,3 +52,30 @@ DELETE http://localhost:8080/greetings/{{deleteGreetingId}}
 
 
 # TODO add requests for your own endpoints!
+
+//register readers
+
+POST http://localhost:8080/auth/register/reader
+Content-Type: application/json
+
+{
+  "name": "nume_utilizator",
+  "password": "parola_utilizator",
+  "email": "1@exemplu.com"
+}
+
+//register librarians
+
+POST http://localhost:8080/auth/register/librarian
+Content-Type: application/json
+
+{
+  "name": "nume",
+  "password": "parola",
+  "email": "email2@exemplu.com"
+}
+
+//login
+
+POST http://localhost:8080/auth/login?email=email@exemplu.com&password=parola_utilizator
+
