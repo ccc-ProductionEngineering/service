@@ -3,6 +3,7 @@ package ro.unibuc.hello.repository;
 import ro.unibuc.hello.data.Reader;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.stereotype.Repository;
@@ -14,6 +15,7 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface ReaderRepository extends MongoRepository<Reader, String> {
 
-    List<Reader> findByEmailAndPassword(String email, String password);
+    Optional<Reader> findByEmail(String email);
+    boolean existsByEmail(String email);
 
 }

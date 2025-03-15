@@ -1,9 +1,9 @@
 package ro.unibuc.hello.data;
 
-import java.time.LocalDate;
-import java.util.List;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
+
+import java.util.List;
 
 @Document(collection = "books")
 public class Book {
@@ -13,82 +13,63 @@ public class Book {
     private String author;
     private String genre;
     private String availability;
-    private Reader borrower;
     private List<Reader> reservers;
-    private LocalDate reservationDate;
-    private LocalDate borrowDate;
 
-    // Getters
+    public Book() {}
+
+    public Book(String title, String author, String genre, String availability) {
+        this.title = title;
+        this.author = author;
+        this.genre = genre;
+        this.availability = availability;
+    }
+
+    // Getteri și setteri
     public String getId() {
         return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 
     public String getTitle() {
         return title;
     }
 
-    public String getAuthor() {
-        return author;
-    }
-
-    public String getGenre() {
-        return genre;
-    }
-
-    public String getAvailability() {
-        return availability;
-    }
-
-    public Reader getBorrower() {
-        return borrower;
-    }
-
-    public List<Reader> getReservers() {
-        return reservers;
-    }
-
-    public LocalDate getReservationDate() {
-        return reservationDate;
-    }
-
-    public LocalDate getBorrowDate() {
-        return borrowDate;
-    }
-
-    // Setters
-    public void setId(String id) {
-        this.id = id;
-    }
-
     public void setTitle(String title) {
         this.title = title;
+    }
+
+    public String getAuthor() {
+        return author;
     }
 
     public void setAuthor(String author) {
         this.author = author;
     }
 
+    public String getGenre() {
+        return genre;
+    }
+
     public void setGenre(String genre) {
         this.genre = genre;
+    }
+
+    public String getAvailability() {
+        return availability;
     }
 
     public void setAvailability(String availability) {
         this.availability = availability;
     }
 
-    public void setBorrower(Reader borrower) {
-        this.borrower = borrower;
+    public List<Reader> getReservers() {
+        return reservers;
     }
 
     public void setReservers(List<Reader> reservers) {
         this.reservers = reservers;
-    }
-
-    public void setReservationDate(LocalDate reservationDate) {
-        this.reservationDate = reservationDate;
-    }
-
-    public void setBorrowDate(LocalDate borrowDate) {
-        this.borrowDate = borrowDate;
     }
 }
