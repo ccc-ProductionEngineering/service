@@ -77,7 +77,7 @@ Content-Type: application/json
 
 //login reader
 
-POST http://localhost:8080/auth/login?email=email@exemplu.com&password=parola_utilizator
+POST http://localhost:8080/auth/login?email=email1@exemplu.com&password=parola_utilizator
 
 //login librarian
 
@@ -86,12 +86,12 @@ POST http://localhost:8080/auth/login?email=email2@exemplu.com&password=parola
 //add book by librarian
 
 POST http://localhost:8080/books/add
-Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJyb2xlcyI6IkFETUlOIiwic3ViIjoiZW1haWwyQGV4ZW1wbHUuY29tIiwiaWF0IjoxNzQyMDU4MDk4LCJleHAiOjE3NDIwOTQwOTh9.F_ictLyD4ovO8sFvIZPy4vgIM9uMUoFF_ZfCqb51ka4
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJyb2xlcyI6IkFETUlOIiwic3ViIjoiZW1haWwyQGV4ZW1wbHUuY29tIiwiaWF0IjoxNzQyMDcwOTE3LCJleHAiOjE3NDIxMDY5MTd9.ArDiOtZzwlKsFGrtvkPPIzindbP0f9jr_uDemTSoZyw
 Content-Type: application/json
 
 {
-  "title": "Hunger Games",
-  "author": "Suzanne Collins",
+  "title": "Harry",
+  "author": "J.K. Rowling",
   "genre": "Fiction",
   "availability": "AVAILABLE"
 }
@@ -116,3 +116,48 @@ Content-Type: application/json
 
 POST http://localhost:8080/return?bookId=67d5b2c57fcdff5948f08903
 Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJyb2xlcyI6IlVTRVIiLCJzdWIiOiJlbWFpbEBleGVtcGx1LmNvbSIsImlhdCI6MTc0MjA2NDk1OSwiZXhwIjoxNzQyMTAwOTU5fQ.Ow9Q6ZhZnWNEROk3QZGQCUc0lvlq4E6N8J1t1cPDHIM
+
+
+//get all books
+GET http://localhost:8080/books/all
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJyb2xlcyI6IkFETUlOIiwic3ViIjoiZW1haWwyQGV4ZW1wbHUuY29tIiwiaWF0IjoxNzQyMDcyMzU3LCJleHAiOjE3NDIxMDgzNTd9.dY8Lq8oldfp63eXiHn7SRD1scz__i98FdXWQ1PSlJuQ
+
+//update book by id
+PUT http://localhost:8080/books/update/67d5e4d88922da74774cb744
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJyb2xlcyI6IkFETUlOIiwic3ViIjoiZW1haWwyQGV4ZW1wbHUuY29tIiwiaWF0IjoxNzQyMDcyMzU3LCJleHAiOjE3NDIxMDgzNTd9.dY8Lq8oldfp63eXiHn7SRD1scz__i98FdXWQ1PSlJuQ
+Content-Type: application/json
+
+{
+  "title": "Harry Potter and the Philosopher's Stone",
+  "author": "J.K. Rowling",
+  "genre": "Fiction",
+  "availability": "RENTED"
+}
+
+//delete book by id
+DELETE http://localhost:8080/books/delete/67d5ef26d28156177bbe0bea
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJyb2xlcyI6IkFETUlOIiwic3ViIjoiZW1haWwyQGV4ZW1wbHUuY29tIiwiaWF0IjoxNzQyMDcyMzU3LCJleHAiOjE3NDIxMDgzNTd9.dY8Lq8oldfp63eXiHn7SRD1scz__i98FdXWQ1PSlJuQ
+
+
+//get all readers
+GET http://localhost:8080/readers/all
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJyb2xlcyI6IkFETUlOIiwic3ViIjoiZW1haWwyQGV4ZW1wbHUuY29tIiwiaWF0IjoxNzQyMDcyMzU3LCJleHAiOjE3NDIxMDgzNTd9.dY8Lq8oldfp63eXiHn7SRD1scz__i98FdXWQ1PSlJuQ
+
+//get all readers with books rented
+GET http://localhost:8080/readers/borrowers
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJyb2xlcyI6IkFETUlOIiwic3ViIjoiZW1haWwyQGV4ZW1wbHUuY29tIiwiaWF0IjoxNzQyMDcyMzU3LCJleHAiOjE3NDIxMDgzNTd9.dY8Lq8oldfp63eXiHn7SRD1scz__i98FdXWQ1PSlJuQ
+
+//get all reader with late books
+GET http://localhost:8080/readers/late
+
+//ban all readers with late books
+POST http://localhost:8080/readers/banlate
+
+
+//get all banned readers
+GET http://localhost:8080/readers/banned
+
+//unban reader
+POST http://localhost:8080/readers/unban/eyJhbGciOiJIUzI1NiJ9.eyJyb2xlcyI6IlVTRVIiLCJzdWIiOiJlbWFpbDFAZXhlbXBsdS5jb20iLCJpYXQiOjE3NDIwNzY3MzEsImV4cCI6MTc0MjExMjczMX0.06ekYCzqFUkMfwPBJqROS7_eay6yNhhBSobmJ7jGk6k
+
+
