@@ -6,7 +6,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import ro.unibuc.hello.data.Rent;
 import ro.unibuc.hello.data.Reader;
-import ro.unibuc.hello.data.Book;
 import ro.unibuc.hello.service.RentService;
 import ro.unibuc.hello.service.ReaderService;
 import ro.unibuc.hello.service.BookService;
