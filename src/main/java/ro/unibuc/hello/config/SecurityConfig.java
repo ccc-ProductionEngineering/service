@@ -36,6 +36,10 @@ public class SecurityConfig {
                 .requestMatchers("/auth/**", "/hello-world", "/availabletitle").permitAll()
                 .requestMatchers("/books/add", "/books/all", "/books/update", "/books/delete", "/readers/all","/readers/borrowers","/readers/late","/readers/ban-late","/readers/banned","readers/un-ban").hasRole("ADMIN")
                 .requestMatchers("/rent", "/return/**").hasRole("USER")
+                .requestMatchers("/reserve/book", "/reserve/unreserve").hasRole("USER")
+                .requestMatchers("/reserve/list/**").hasRole("ADMIN")
+                .requestMatchers("/reserve/my-reservations").hasRole("USER")
+
                 .anyRequest().authenticated()
             )
                 .addFilterBefore(jwtRequestFilter, org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter.class);
@@ -51,8 +55,10 @@ public class SecurityConfig {
     @Bean
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
+        configuration.setAllowedOrigins(List.of("*"));
         configuration.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "OPTIONS"));
         configuration.setAllowedHeaders(List.of("Authorization", "Content-Type"));
+        configuration.setAllowCredentials(true); 
 
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         source.registerCorsConfiguration("/**", configuration);
