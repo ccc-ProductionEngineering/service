@@ -7,6 +7,8 @@ import ro.unibuc.hello.repository.BookRepository;
 import ro.unibuc.hello.service.BookService;
 import org.springframework.security.access.prepost.PreAuthorize;
 import java.util.Optional;
+import java.util.List;
+
 
 @RestController
 @CrossOrigin(origins = "*")
@@ -32,4 +34,24 @@ public class BookController {
     public Optional<Book> getByAvailableTitle(@RequestBody String title) {
         return bookService.getByAvailableTitle(title);
     }
+
+    @GetMapping("/all")
+    public List<Book> getAllBooks() {
+        return bookService.getAllBooks();
+    }
+
+    @PutMapping("/update/{id}")
+    public String updateBook(@PathVariable String id, @RequestBody Book bookDetails) {
+        return bookService.updateBook(id, bookDetails)
+                .map(book -> "Cartea a fost actualizata cu succes!")
+                .orElse("Cartea nu a fost gasita!");
+    }
+
+    @DeleteMapping("/delete/{id}")
+    public String deleteBook(@PathVariable String id)
+    {
+        return bookService.deleteBook(id) ? "Cartea a fost stearsa cu succes!" : "Cartea nu a fost gasita!";
+    }
+
+
 }

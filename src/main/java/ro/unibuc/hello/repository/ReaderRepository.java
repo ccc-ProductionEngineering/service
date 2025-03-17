@@ -2,7 +2,7 @@ package ro.unibuc.hello.repository;
 
 import ro.unibuc.hello.data.Reader;
 
-import java.util.List;
+
 import java.util.Optional;
 
 import org.springframework.data.mongodb.repository.MongoRepository;
