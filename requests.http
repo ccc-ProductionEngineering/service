@@ -59,9 +59,9 @@ POST http://localhost:8080/auth/register/reader
 Content-Type: application/json
 
 {
-  "name": "nume3",
-  "password": "parola_utilizator3",
-  "email": "email3@exemplu.com"
+  "name": "nume4",
+  "password": "parola_utilizator4",
+  "email": "email4@exemplu.com"
 }
 
 //register librarians
@@ -77,7 +77,7 @@ Content-Type: application/json
 
 //login reader
 
-POST http://localhost:8080/auth/login?email=email3@exemplu.com&password=parola_utilizator3
+POST http://localhost:8080/auth/login?email=email4@exemplu.com&password=parola_utilizator4
 
 //login librarian
 
@@ -99,7 +99,7 @@ Content-Type: application/json
 //rent book by book id
 
 POST http://localhost:8080/rent?bookId=67d7ed255b85841f81f32548
-Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJyb2xlcyI6IlVTRVIiLCJzdWIiOiJlbWFpbDNAZXhlbXBsdS5jb20iLCJpYXQiOjE3NDIyMDQ0NTIsImV4cCI6MTc0MjI0MDQ1Mn0.71jckd-II8qZyMHuFaxk4md0b6frnzAkuuGBN5EVl90
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJyb2xlcyI6IlVTRVIiLCJzdWIiOiJlbWFpbDNAZXhlbXBsdS5jb20iLCJpYXQiOjE3NDIyMDYwNzYsImV4cCI6MTc0MjI0MjA3Nn0.yWUzSvGrvO2c78ZmDINL6UUjzddXXwuglEQwRhMo1Cs
 
 //rent book by title
 //not working
@@ -115,7 +115,7 @@ Content-Type: application/json
 // return book
 
 POST http://localhost:8080/return?bookId=67d7ed255b85841f81f32548
-Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJyb2xlcyI6IlVTRVIiLCJzdWIiOiJlbWFpbDFAZXhlbXBsdS5jb20iLCJpYXQiOjE3NDIyMDQyNTMsImV4cCI6MTc0MjI0MDI1M30.Tb7yOZMKULW69HxKh2CfyG-V4uY2xwDScAsP8P7jng0
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJyb2xlcyI6IlVTRVIiLCJzdWIiOiJlbWFpbDNAZXhlbXBsdS5jb20iLCJpYXQiOjE3NDIyMDYwNzYsImV4cCI6MTc0MjI0MjA3Nn0.yWUzSvGrvO2c78ZmDINL6UUjzddXXwuglEQwRhMo1Cs
 
 //get all books
 GET http://localhost:8080/books/all
@@ -164,7 +164,7 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJyb2xlcyI6IkFETUlOIiwic3ViIjoiZW1ha
 
 // reserve book (you see the number you are at the que) (reader)
 POST http://localhost:8080/reserve/book?bookId=67d7ed255b85841f81f32548
-Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJyb2xlcyI6IlVTRVIiLCJzdWIiOiJlbWFpbDNAZXhlbXBsdS5jb20iLCJpYXQiOjE3NDIyMDQ0NTIsImV4cCI6MTc0MjI0MDQ1Mn0.71jckd-II8qZyMHuFaxk4md0b6frnzAkuuGBN5EVl90
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJyb2xlcyI6IlVTRVIiLCJzdWIiOiJlbWFpbDRAZXhlbXBsdS5jb20iLCJpYXQiOjE3NDIyMDYwMTEsImV4cCI6MTc0MjI0MjAxMX0.smyhN3Jy5_OUbCus0lUqlonBTwgbtBnJSLqOPu20wT8
 
 // unreserve book (reader)
 POST http://localhost:8080/reserve/unreserve?bookId=67d69d9e900fd079c81232d3
@@ -176,4 +176,4 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJyb2xlcyI6IkFETUlOIiwic3ViIjoiZW1ha
 
 // see your reservations (reader)
 GET http://localhost:8080/reserve/my-reservations
-Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJyb2xlcyI6IlVTRVIiLCJzdWIiOiJlbWFpbDNAZXhlbXBsdS5jb20iLCJpYXQiOjE3NDIyMDQ0NTIsImV4cCI6MTc0MjI0MDQ1Mn0.71jckd-II8qZyMHuFaxk4md0b6frnzAkuuGBN5EVl90
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJyb2xlcyI6IlVTRVIiLCJzdWIiOiJlbWFpbDRAZXhlbXBsdS5jb20iLCJpYXQiOjE3NDIyMDg3MDEsImV4cCI6MTc0MjI0NDcwMX0.RWEtsAD35BCijwiNr52F4Pv4BZwK-voCbRsGexyc90o
