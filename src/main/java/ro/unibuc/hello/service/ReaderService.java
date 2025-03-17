@@ -3,6 +3,7 @@ import ro.unibuc.hello.data.Reader;
 import ro.unibuc.hello.repository.ReaderRepository;
 import ro.unibuc.hello.repository.RentRepository;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -43,7 +44,7 @@ public class ReaderService {
 
         return readerRepository.findAll().stream()
                 .filter(reader -> rentRepository.findByIdReader(reader.getId()).stream()
-                        .anyMatch(rent -> rent.getReturnDate().isBefore(now)))
+                        .anyMatch(rent -> rent.getBorrowDate().isBefore(LocalDateTime.now().minusWeeks(1))))
                 .collect(Collectors.toList());
     }
 

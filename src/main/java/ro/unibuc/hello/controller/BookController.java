@@ -30,11 +30,6 @@ public class BookController {
         return "Cartea a fost adăugată cu succes!";
     }
 
-    @GetMapping("/availabletitle")
-    public Optional<Book> getByAvailableTitle(@RequestBody String title) {
-        return bookService.getByAvailableTitle(title);
-    }
-
     @GetMapping("/all")
     public List<Book> getAllBooks() {
         return bookService.getAllBooks();
