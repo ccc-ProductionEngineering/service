@@ -9,6 +9,7 @@ import ro.unibuc.hello.data.Reservation;
 import ro.unibuc.hello.service.ReservationService;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 @RestController
@@ -48,24 +49,25 @@ public class ReservationController {
         Optional<Reservation> reservation = reservationService.getReservationByBookId(bookId);
     
         return reservation
-            .map(res -> ResponseEntity.ok().body((Object) res)) // Explicitare tipului ca Object
+            .map(res -> ResponseEntity.ok().body((Object) res)) 
             .orElseGet(() -> ResponseEntity.badRequest().body("No reservations found."));
     }
 
     @GetMapping("/my-reservations")
-public ResponseEntity<?> getUserReservations(Authentication authentication) {
-    if (authentication == null || authentication.getName() == null) {
-        return ResponseEntity.status(HttpStatus.FORBIDDEN).body("User not authenticated.");
+    public ResponseEntity<?> getUserReservations(Authentication authentication) {
+        if (authentication == null || authentication.getName() == null) {
+            return ResponseEntity.status(HttpStatus.FORBIDDEN).body("User not authenticated.");
+        }
+
+        String readerId = authentication.getName();
+        List<Map<String, Object>> reservations = reservationService.getBookTitlesAndQueuePositionsByReaderId(readerId);
+
+        if (reservations.isEmpty()) {
+            return ResponseEntity.ok("No reservations found.");
+        }
+
+        return ResponseEntity.ok(reservations);
     }
 
-    String readerId = authentication.getName();
-    List<Reservation> userReservations = reservationService.getReservationsByReaderId(readerId);
-
-    if (userReservations.isEmpty()) {
-        return ResponseEntity.ok("No reservations found.");
-    }
-
-    return ResponseEntity.ok(userReservations);
-}
 
 }
