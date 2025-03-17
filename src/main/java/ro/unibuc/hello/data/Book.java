@@ -12,16 +12,16 @@ public class Book {
     private String title;
     private String author;
     private String genre;
-    private String availability;
+    private Integer copies;
     private List<Reader> reservers;
 
     public Book() {}
 
-    public Book(String title, String author, String genre, String availability) {
+    public Book(String title, String author, String genre, Integer copies) {
         this.title = title;
         this.author = author;
         this.genre = genre;
-        this.availability = availability;
+        this.copies = copies;
     }
 
     // Getteri și setteri
@@ -57,12 +57,12 @@ public class Book {
         this.genre = genre;
     }
 
-    public String getAvailability() {
-        return availability;
+    public Integer getCopies() {
+        return copies;
     }
 
-    public void setAvailability(String availability) {
-        this.availability = availability;
+    public void setCopies(Integer copies) {
+        this.copies = copies;
     }
 
     public List<Reader> getReservers() {

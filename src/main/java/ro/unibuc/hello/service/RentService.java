@@ -27,11 +27,12 @@ public class RentService {
             throw new RuntimeException("Book not found");
         }
         Book book = optionalBook.get();
-        if (!"AVAILABLE".equalsIgnoreCase(book.getAvailability())) {
+        if (book.getCopies() == 0) {
             throw new RuntimeException("Book is not available for rent");
         }
         Rent rent = new Rent(idReader, idBook, LocalDateTime.now(), null);
-        book.setAvailability("RENTED");
+        int newCopies = book.getCopies() -  1;
+        book.setCopies(newCopies);
         bookRepository.save(book);
         return rentRepository.save(rent);
     }
@@ -52,7 +53,8 @@ public class RentService {
             throw new IllegalArgumentException("Book not found with id " + rent.getIdBook());
         }
         Book book = bookOpt.get();
-        book.setAvailability("AVAILABLE");
+        int newCopies = book.getCopies() + 1;
+        book.setCopies(newCopies);
         bookRepository.save(book);
         return rentRepository.save(rent);
     }
