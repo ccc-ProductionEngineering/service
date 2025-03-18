@@ -1,3 +1,33 @@
+# Online library
+
+Team members: [Carina](https://github.com/SaicuCarina), [Corina](https://github.com/corinagherasim), [Cosmin](https://github.com/CosminBalaita2003)
+
+## Classes/Collections we used:
+* Book
+* Librarian
+* Reader
+* Rent
+* Reservation
+
+## Functionalities:
+* Login and Register
+### For users:
+* Rent and return book
+* Reserve and unreserve book
+* See all reservations he made
+### For admin:
+* Get all books
+* Add book
+* Update book
+* Delete book by id
+* Get all reders with rented books
+* Get all readers with late return dates
+* Ban readers with late return dates
+* Unban reader
+* Get all  banned users
+* See list of reservers for books
+
+
 # Prerequisites
 
 For using Github Codespaces, no prerequisites are mandatory.
