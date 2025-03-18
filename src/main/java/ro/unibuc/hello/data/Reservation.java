@@ -31,6 +31,10 @@ public class Reservation {
         return readerIds;
     }
 
+    public void setReaderIds(List<String> readerIds) {
+        this.readerIds = readerIds;
+    }
+
     public void addReader(String readerId) {
         readerIds.add(readerId);
     }

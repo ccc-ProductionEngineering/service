@@ -28,7 +28,7 @@ public class BookService {
         List<Book> books = bookRepository.findByTitle(title);
 
         return books.stream()
-                .filter(book -> book.getAvailability() == "AVAILABLE")
+                .filter(book -> book.getCopies() > 0)
                 .findFirst();
     }
 
@@ -39,7 +39,7 @@ public class BookService {
             book.setTitle(bookDetails.getTitle());
             book.setAuthor(bookDetails.getAuthor());
             book.setGenre(bookDetails.getGenre());
-            book.setAvailability(bookDetails.getAvailability());
+            book.setCopies(bookDetails.getCopies());
             return bookRepository.save(book);
         });
     }
