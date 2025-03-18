@@ -30,7 +30,7 @@ public class AuthService {
 
     public String registerReader(Reader reader) {
         if (readerRepository.existsByEmail(reader.getEmail()) || librarianRepository.existsByEmail(reader.getEmail())) {
-            return "Email already exists!";
+            throw new RuntimeException("Email already exists!");
         }
         Reader readerSave = new Reader(reader.getName(), reader.getEmail(), passwordEncoder.encode(reader.getPassword()), "USER");
         readerRepository.save(readerSave);
@@ -39,7 +39,7 @@ public class AuthService {
 
     public String registerLibrarian(Librarian librarian) {
         if (readerRepository.existsByEmail(librarian.getEmail()) || librarianRepository.existsByEmail(librarian.getEmail())) {
-            return "Email already exists!";
+            throw new RuntimeException("Email already exists!");
         }
         Librarian librarianSave = new Librarian(librarian.getName(), librarian.getEmail(), passwordEncoder.encode(librarian.getPassword()), "ADMIN");
         librarianRepository.save(librarianSave);
