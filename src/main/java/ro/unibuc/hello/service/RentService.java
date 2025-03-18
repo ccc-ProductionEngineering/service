@@ -32,55 +32,59 @@ public class RentService {
     @Autowired
     private ReservationRepository reservationRepository;
 
-    public Rent rentBook(String idReader, String idBook) {
-        // Căutăm cartea după ID
-        Optional<Book> optionalBook = bookRepository.findById(idBook);
-        if (optionalBook.isEmpty()) {
-            throw new RuntimeException("Book not found");
-        }
-    
-        // Căutăm cititorul după ID
+    public boolean findFirstInQueue(String idReader, String idBook) {
         Optional<Reader> optionalReader = readerRepository.findById(idReader);
         if (!optionalReader.isPresent()) {
             throw new RuntimeException("Reader not found");
         }
         Reader reader = optionalReader.get();
+    
+        Optional<Reservation> optionalReservation = reservationRepository.findByBookIdAndReaderIdsContaining(idBook, reader.getEmail());
+    
+        if (!optionalReservation.isPresent()) {
+            return true;
+        }
+    
+        Reservation reservation = optionalReservation.get();
+        List<String> readerIds = reservation.getReaderIds();
+    
+        if (readerIds.isEmpty()) {
+            return true;
+        }
+
+        if (readerIds.get(0).equals(reader.getEmail())) {
+            readerIds.remove(0);
+            reservation.setReaderIds(readerIds);
+            reservationRepository.save(reservation);
+            return true;
+        }
+    
+        return false;
+    }
+    
+
+    public Rent rentBook(String idReader, String idBook) {
+        Optional<Book> optionalBook = bookRepository.findById(idBook);
+        if (optionalBook.isEmpty()) {
+            throw new RuntimeException("Book not found");
+        }
+        
         Book book = optionalBook.get();
     
-        // Verificăm dacă există copii disponibile
         if (book.getCopies() == 0) {
             throw new RuntimeException("Book is not available for rent");
         }
     
-        // Obținem lista de cititori din coada de rezervare (readerIds)
-        Optional<Reservation> optionalReservation = reservationRepository.findByBookIdAndReaderIdsContaining(idBook, reader.getEmail());
-        if (optionalReservation.isEmpty()) {
-            throw new RuntimeException("No reservation found for this book");
-        }
+        boolean checkQueue = findFirstInQueue(idReader, idBook);
     
-        Reservation reservation = optionalReservation.get();
-        List<String> readerIds = reservation.getReaderIds();  // Obținem direct lista
-    
-        // Verificăm dacă cititorul curent este primul în coadă
-        if (!readerIds.get(0).equals(reader.getEmail())) {
+        if (!checkQueue) {
             throw new RuntimeException("You are not the first in the queue for this book");
         }
-    
-        // Eliminăm cititorul din coada de rezervare
-        readerIds.remove(reader.getEmail());
-    
-        // Actualizăm rezervarea în baza de date
-        reservation.setReaderIds(readerIds);
-        reservationRepository.save(reservation);
-    
-        // Creăm înregistrarea de închiriere
+
         Rent rent = new Rent(idReader, idBook, LocalDateTime.now(), null);
     
-        // Actualizăm numărul de copii disponibile
         int newCopies = book.getCopies() - 1;
         book.setCopies(newCopies);
-    
-        // Salvăm cartea actualizată și înregistrarea de închiriere
         bookRepository.save(book);
         return rentRepository.save(rent);
     }
