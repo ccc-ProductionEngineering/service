@@ -59,9 +59,9 @@ POST http://localhost:8080/auth/register/reader
 Content-Type: application/json
 
 {
-  "name": "nume4",
-  "password": "parola_utilizator4",
-  "email": "email4@exemplu.com"
+  "name": "nume2",
+  "password": "parola_utilizator2",
+  "email": "email2@exemplu.com"
 }
 
 //register librarians
@@ -77,7 +77,7 @@ Content-Type: application/json
 
 //login reader
 
-POST http://localhost:8080/auth/login?email=email4@exemplu.com&password=parola_utilizator4
+POST http://localhost:8080/auth/login?email=email2@exemplu.com&password=parola_utilizator2
 
 //login librarian
 
@@ -86,20 +86,20 @@ POST http://localhost:8080/auth/login?email=emaillib@exemplu.com&password=parola
 //add book by librarian
 
 POST http://localhost:8080/books/add
-Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJyb2xlcyI6IkFETUlOIiwic3ViIjoiZW1haWxsaWJAZXhlbXBsdS5jb20iLCJpYXQiOjE3NDIyMDQxNzUsImV4cCI6MTc0MjI0MDE3NX0.u5BgvqKF-rrDzXHvzsFo3EAdcs4RK53Yj2FuJpKNR4E
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJyb2xlcyI6IkFETUlOIiwic3ViIjoiZW1haWxsaWJAZXhlbXBsdS5jb20iLCJpYXQiOjE3NDIzMDM1NjksImV4cCI6MTc0MjMzOTU2OX0.1DA_o0OReGAqcwyh5mxCbtErVy5V_5-lqkfMs6M0hDI
 Content-Type: application/json
 
 {
   "title": "A Game of Thrones",
   "author": "George R.R. Martin",
   "genre": "Fiction",
-  "copies": 2
+  "copies": 1
 }
 
 //rent book by book id
 
-POST http://localhost:8080/rent?bookId=67d7ed255b85841f81f32548
-Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJyb2xlcyI6IlVTRVIiLCJzdWIiOiJlbWFpbDNAZXhlbXBsdS5jb20iLCJpYXQiOjE3NDIyMDYwNzYsImV4cCI6MTc0MjI0MjA3Nn0.yWUzSvGrvO2c78ZmDINL6UUjzddXXwuglEQwRhMo1Cs
+POST http://localhost:8080/rent?bookId=67d97187ae0eb30eac9de288
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJyb2xlcyI6IlVTRVIiLCJzdWIiOiJlbWFpbDJAZXhlbXBsdS5jb20iLCJpYXQiOjE3NDIzMDM3NDgsImV4cCI6MTc0MjMzOTc0OH0.ablYPxZrgJg5JvLiSzoK7aa1JsOsIEa9XkG5wIn51lU
 
 //rent book by title
 //not working
