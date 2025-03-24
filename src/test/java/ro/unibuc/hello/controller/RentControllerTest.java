@@ -1,22 +1,26 @@
-//failing tests: 401 UNAUTHORIZED
-
 package ro.unibuc.hello.controller;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.mockito.*;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
+import org.springframework.http.MediaType;
+import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.setup.MockMvcBuilders;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.userdetails.UserDetails;
 import ro.unibuc.hello.data.Rent;
 import ro.unibuc.hello.data.Reader;
 import ro.unibuc.hello.service.RentService;
 import ro.unibuc.hello.service.ReaderService;
 import ro.unibuc.hello.service.BookService;
-
-import static org.mockito.Mockito.*;
-import static org.junit.jupiter.api.Assertions.*;
-
 import java.time.LocalDateTime;
+import java.util.Optional;
+import static org.mockito.ArgumentMatchers.anyString;
+import static org.mockito.Mockito.*;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 class RentControllerTest {
 
@@ -32,59 +36,80 @@ class RentControllerTest {
     @InjectMocks
     private RentController rentController;
 
-    private Reader reader;
+    private MockMvc mockMvc;
 
     @BeforeEach
-    void setUp() {
+    public void setUp() {
         MockitoAnnotations.openMocks(this);
-        reader = new Reader("John Doe", "john.doe@example.com", "password123", "USER");
+        mockMvc = MockMvcBuilders.standaloneSetup(rentController).build();
     }
 
     @Test
-    void testRentBook_Success() {
-        when(readerService.getReaderByEmail("john.doe@example.com")).thenReturn(reader);
-        Rent rent = new Rent("readerId", "bookId", LocalDateTime.now(), null);
-        when(rentService.rentBook("readerId", "bookId")).thenReturn(rent);
+    void test_rentBook_authenticated() throws Exception {
+        Authentication auth = mock(Authentication.class);
+        UserDetails userDetails = mock(UserDetails.class);
+        
+        when(userDetails.getUsername()).thenReturn("reader1@example.com");
+        when(auth.getPrincipal()).thenReturn(userDetails);
+        when(auth.getName()).thenReturn("reader1@example.com");
 
-        ResponseEntity<Rent> response = rentController.rentBook("bookId");
+        Reader mockReader = new Reader("Reader Name", "reader1@example.com", "password", "USER");
+        mockReader.setId("reader1-id");
 
-        assertEquals(HttpStatus.CREATED, response.getStatusCode());
-        assertNotNull(response.getBody());
-        assertEquals("readerId", response.getBody().getIdReader());
-        assertEquals("bookId", response.getBody().getIdBook());
+        when(readerService.getReaderByEmail("reader1@example.com")).thenReturn(mockReader);
+
+        Rent mockRent = new Rent("reader1-id", "book1", LocalDateTime.now(), null);
+        when(rentService.rentBook("reader1-id", "book1")).thenReturn(mockRent);
+
+        mockMvc.perform(post("/rent")
+                .param("bookId", "book1")
+                .principal(auth))
+                .andExpect(status().isCreated())
+                .andExpect(jsonPath("$.idReader").value("reader1-id"))
+                .andExpect(jsonPath("$.idBook").value("book1"))
+                .andExpect(jsonPath("$.borrowDate").exists());
     }
 
     @Test
-    void testRentBook_BookNotFound() {
-        when(readerService.getReaderByEmail("john.doe@example.com")).thenReturn(reader);
-        when(rentService.rentBook("readerId", "nonExistentBookId")).thenReturn(null);
-
-        ResponseEntity<Rent> response = rentController.rentBook("nonExistentBookId");
-
-        assertEquals(HttpStatus.NOT_FOUND, response.getStatusCode());
+    void test_rentBook_unauthenticated() throws Exception {
+        mockMvc.perform(post("/rent")
+                .param("bookId", "bookId"))
+                .andExpect(status().isUnauthorized());
     }
 
     @Test
-    void testReturnBook_Success() {
-        when(readerService.getReaderByEmail("john.doe@example.com")).thenReturn(reader);
-        Rent rent = new Rent("readerId", "bookId", LocalDateTime.now(), LocalDateTime.now().plusDays(10));
-        when(rentService.getRentsByBookIdAndReaderId("readerId", "bookId")).thenReturn(java.util.Optional.of(rent));
-        when(rentService.returnBook("rentId")).thenReturn(rent);
+    void test_returnBook_authenticated() throws Exception {
+        Authentication auth = mock(Authentication.class);
+        UserDetails userDetails = mock(UserDetails.class);
 
-        ResponseEntity<Rent> response = rentController.returnBook("bookId");
+        when(userDetails.getUsername()).thenReturn("reader1@example.com");
+        when(auth.getPrincipal()).thenReturn(userDetails);
+        when(auth.getName()).thenReturn("reader1@example.com");
 
-        assertEquals(HttpStatus.OK, response.getStatusCode());
-        assertNotNull(response.getBody());
-        assertEquals("readerId", response.getBody().getIdReader());
+        Reader mockReader = new Reader("Reader Name", "reader1@example.com", "password", "USER");
+        mockReader.setId("reader1-id");
+
+        when(readerService.getReaderByEmail("reader1@example.com")).thenReturn(mockReader);
+
+        Rent mockRent = new Rent("reader1-id", "book1", LocalDateTime.now().minusDays(2), null);
+        when(rentService.getRentsByBookIdAndReaderId("reader1-id", "book1")).thenReturn(Optional.of(mockRent));
+
+        Rent returnedRent = new Rent("reader1-id", "book1", LocalDateTime.now().minusDays(2), LocalDateTime.now());
+        when(rentService.returnBook(mockRent.getId())).thenReturn(returnedRent);
+
+        mockMvc.perform(post("/return")
+                .param("bookId", "book1")
+                .principal(auth))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.idReader").value("reader1-id"))
+                .andExpect(jsonPath("$.idBook").value("book1"))
+                .andExpect(jsonPath("$.returnDate").exists());
     }
 
     @Test
-    void testReturnBook_RentNotFound() {
-        when(readerService.getReaderByEmail("john.doe@example.com")).thenReturn(reader);
-        when(rentService.getRentsByBookIdAndReaderId("readerId", "nonExistentBookId")).thenReturn(java.util.Optional.empty());
-
-        ResponseEntity<Rent> response = rentController.returnBook("nonExistentBookId");
-
-        assertEquals(HttpStatus.NOT_FOUND, response.getStatusCode());
+    void test_returnBook_Unauthorized() throws Exception {
+        mockMvc.perform(post("/return")
+               .param("bookId", "1"))
+               .andExpect(status().isUnauthorized());
     }
 }
