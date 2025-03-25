@@ -108,6 +108,10 @@ task testE2E() {
 	}
 }
 
+tasks.withType(JavaCompile) {
+    options.compilerArgs << '-parameters'
+}
+
 asciidoctor {
 	inputs.dir snippetsDir
 	dependsOn test

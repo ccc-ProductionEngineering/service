@@ -47,6 +47,11 @@ public class BookController {
     {
         return bookService.deleteBook(id) ? "Cartea a fost stearsa cu succes!" : "Cartea nu a fost gasita!";
     }
+    @Autowired
+    public BookController(BookRepository bookRepository, BookService bookService) {
+    this.bookRepository = bookRepository;
+    this.bookService = bookService;
+}
 
 
 }
