@@ -86,7 +86,7 @@ POST http://localhost:8080/auth/login?email=emaillib@exemplu.com&password=parola
 //add book by librarian
 
 POST http://localhost:8080/books/add
-Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJyb2xlcyI6IkFETUlOIiwic3ViIjoiZW1haWxsaWJAZXhlbXBsdS5jb20iLCJpYXQiOjE3NDIzMDM1NjksImV4cCI6MTc0MjMzOTU2OX0.1DA_o0OReGAqcwyh5mxCbtErVy5V_5-lqkfMs6M0hDI
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJyb2xlcyI6IkFETUlOIiwic3ViIjoiZW1haWxsaWJAZXhlbXBsdS5jb20iLCJpYXQiOjE3NDI4MjQ4ODcsImV4cCI6MTc0Mjg2MDg4N30.GtAWIqZD3fEmCMFOHkgu8mfVwciOjoAneDRGoGntvEU
 Content-Type: application/json
 
 {
@@ -98,8 +98,8 @@ Content-Type: application/json
 
 //rent book by book id
 
-POST http://localhost:8080/rent?bookId=67d97187ae0eb30eac9de288
-Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJyb2xlcyI6IlVTRVIiLCJzdWIiOiJlbWFpbDJAZXhlbXBsdS5jb20iLCJpYXQiOjE3NDIzMDM3NDgsImV4cCI6MTc0MjMzOTc0OH0.ablYPxZrgJg5JvLiSzoK7aa1JsOsIEa9XkG5wIn51lU
+POST http://localhost:8080/rent?bookId=67e165c9c38ae478e30c724c
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJyb2xlcyI6IlVTRVIiLCJzdWIiOiJlbWFpbDJAZXhlbXBsdS5jb20iLCJpYXQiOjE3NDI4MjQ5NzAsImV4cCI6MTc0Mjg2MDk3MH0.UZdCXhDJKikxYbllhVTihuATGVxmjfMB6xLA7yV9wiw
 
 //rent book by title
 //not working
@@ -114,8 +114,8 @@ Content-Type: application/json
 
 // return book
 
-POST http://localhost:8080/return?bookId=67d7ed255b85841f81f32548
-Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJyb2xlcyI6IlVTRVIiLCJzdWIiOiJlbWFpbDNAZXhlbXBsdS5jb20iLCJpYXQiOjE3NDIyMDYwNzYsImV4cCI6MTc0MjI0MjA3Nn0.yWUzSvGrvO2c78ZmDINL6UUjzddXXwuglEQwRhMo1Cs
+POST http://localhost:8080/return?bookId=67e165c9c38ae478e30c724c
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJyb2xlcyI6IlVTRVIiLCJzdWIiOiJlbWFpbDJAZXhlbXBsdS5jb20iLCJpYXQiOjE3NDI4MjY4OTcsImV4cCI6MTc0Mjg2Mjg5N30.cMX3Ct0lFOX6rcGyqQJrwSPIP-palms4_xuNpAMWPt8
 
 //get all books
 GET http://localhost:8080/books/all
