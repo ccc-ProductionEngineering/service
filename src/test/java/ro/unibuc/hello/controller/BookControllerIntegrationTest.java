@@ -31,6 +31,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @Testcontainers
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 @Import(NoSecurityConfig.class)
+@Tag("IntegrationTest")
 public class BookControllerIntegrationTest {
 
     @Container
