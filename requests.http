@@ -70,9 +70,9 @@ POST http://localhost:8080/auth/register/librarian
 Content-Type: application/json
 
 {
-  "name": "nume",
-  "password": "parola",
-  "email": "emaillib@exemplu.com"
+  "name": "nume2",
+  "password": "parola2",
+  "email": "emaillib2@exemplu.com"
 }
 
 //login reader
@@ -81,22 +81,21 @@ POST http://localhost:8080/auth/login?email=email2@exemplu.com&password=parola_u
 
 //login librarian
 
-POST http://localhost:8080/auth/login?email=emaillib@exemplu.com&password=parola
+POST http://localhost:8080/auth/login?email=emaillib2@exemplu.com&password=parola2
 
 //add book by librarian
 
 POST http://localhost:8080/books/add
-
-Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJyb2xlcyI6IkFETUlOIiwic3ViIjoiZW1haWxsaWJAZXhlbXBsdS5jb20iLCJpYXQiOjE3NDM0MzA0OTUsImV4cCI6MTc0MzQ2NjQ5NX0.qOMNMbjgqvyxBc3rlEvyNWhHNSJcha93BmDAII6BVWE
-
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJyb2xlcyI6IkFETUlOIiwic3ViIjoiZW1haWxsaWIyQGV4ZW1wbHUuY29tIiwiaWF0IjoxNzQzNDQ2NjMwLCJleHAiOjE3NDM0ODI2MzB9.wbB6vTUZjT4cp4bCWFmn4Z_KU5TWLtAW7Fo3reRkWFI
 Content-Type: application/json
 
 {
   "title": "A Game of Thrones",
   "author": "George R.R. Martin",
   "genre": "Fiction",
-  "copies": 1
+  "copies": 5
 }
+
 
 //rent book by book id
 
