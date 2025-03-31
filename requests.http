@@ -59,9 +59,9 @@ POST http://localhost:8080/auth/register/reader
 Content-Type: application/json
 
 {
-  "name": "nume2",
-  "password": "parola_utilizator2",
-  "email": "email2@exemplu.com"
+  "name": "nume1",
+  "password": "parola_utilizator1",
+  "email": "email1@exemplu.com"
 }
 
 //register librarians
@@ -86,7 +86,9 @@ POST http://localhost:8080/auth/login?email=emaillib@exemplu.com&password=parola
 //add book by librarian
 
 POST http://localhost:8080/books/add
+
 Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJyb2xlcyI6IkFETUlOIiwic3ViIjoiZW1haWxsaWJAZXhlbXBsdS5jb20iLCJpYXQiOjE3NDM0MzA0OTUsImV4cCI6MTc0MzQ2NjQ5NX0.qOMNMbjgqvyxBc3rlEvyNWhHNSJcha93BmDAII6BVWE
+
 Content-Type: application/json
 
 {
