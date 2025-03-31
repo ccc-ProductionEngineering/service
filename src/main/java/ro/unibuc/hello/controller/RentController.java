@@ -13,6 +13,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import java.util.Optional;
 
 @RestController
 public class RentController {
@@ -34,35 +35,12 @@ public class RentController {
         }
 
         String email = ((UserDetails) authentication.getPrincipal()).getUsername();
-
         Reader reader = readerService.getReaderByEmail(email);
         String readerId = reader.getId();
 
         Rent rent = rentService.rentBook(readerId, bookId);
         return new ResponseEntity<>(rent, HttpStatus.CREATED);
     }
-
-    //not working
-    @PostMapping("/rentbytitle")
-    public ResponseEntity<Rent> rentBookByTitle(@RequestBody String title) {
-
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-
-        if (authentication == null || !(authentication.getPrincipal() instanceof UserDetails)) {
-            return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
-        }
-
-        String email = ((UserDetails) authentication.getPrincipal()).getUsername();
-
-        Reader reader = readerService.getReaderByEmail(email);
-        String readerId = reader.getId();
-
-        String bookId = bookService.getByAvailableTitle(title).get().getId();
-
-        Rent rent = rentService.rentBook(readerId, bookId);
-        return new ResponseEntity<>(rent, HttpStatus.CREATED);
-    }
-
 
     @PostMapping("/return")
     public ResponseEntity<Rent> returnBook(@RequestParam("bookId") String bookId, Authentication authentication) {
@@ -72,13 +50,15 @@ public class RentController {
         }
 
         String email = ((UserDetails) authentication.getPrincipal()).getUsername();
-
         Reader reader = readerService.getReaderByEmail(email);
         String readerId = reader.getId();
 
-        String rentId = rentService.getRentsByBookIdAndReaderId(readerId, bookId).get().getId();
+        Optional<Rent> optionalRent = rentService.getRentsByBookIdAndReaderId(readerId, bookId);
+        if (optionalRent.isEmpty()) {
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
 
-        Rent rent = rentService.returnBook(rentId);
+        Rent rent = rentService.returnBook(optionalRent.get().getId());
         return new ResponseEntity<>(rent, HttpStatus.OK);
     }
 }
