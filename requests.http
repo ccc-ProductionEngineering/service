@@ -59,9 +59,9 @@ POST http://localhost:8080/auth/register/reader
 Content-Type: application/json
 
 {
-  "name": "nume2",
-  "password": "parola_utilizator2",
-  "email": "email2@exemplu.com"
+  "name": "nume1",
+  "password": "parola_utilizator1",
+  "email": "email1@exemplu.com"
 }
 
 //register librarians
@@ -70,9 +70,9 @@ POST http://localhost:8080/auth/register/librarian
 Content-Type: application/json
 
 {
-  "name": "nume",
-  "password": "parola",
-  "email": "emaillib@exemplu.com"
+  "name": "nume2",
+  "password": "parola2",
+  "email": "emaillib2@exemplu.com"
 }
 
 //login reader
@@ -81,20 +81,21 @@ POST http://localhost:8080/auth/login?email=email2@exemplu.com&password=parola_u
 
 //login librarian
 
-POST http://localhost:8080/auth/login?email=emaillib@exemplu.com&password=parola
+POST http://localhost:8080/auth/login?email=emaillib2@exemplu.com&password=parola2
 
 //add book by librarian
 
 POST http://localhost:8080/books/add
-Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJyb2xlcyI6IkFETUlOIiwic3ViIjoiZW1haWxsaWJAZXhlbXBsdS5jb20iLCJpYXQiOjE3NDI4MjQ4ODcsImV4cCI6MTc0Mjg2MDg4N30.GtAWIqZD3fEmCMFOHkgu8mfVwciOjoAneDRGoGntvEU
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJyb2xlcyI6IkFETUlOIiwic3ViIjoiZW1haWxsaWIyQGV4ZW1wbHUuY29tIiwiaWF0IjoxNzQzNDQ2NjMwLCJleHAiOjE3NDM0ODI2MzB9.wbB6vTUZjT4cp4bCWFmn4Z_KU5TWLtAW7Fo3reRkWFI
 Content-Type: application/json
 
 {
   "title": "A Game of Thrones",
   "author": "George R.R. Martin",
   "genre": "Fiction",
-  "copies": 1
+  "copies": 5
 }
+
 
 //rent book by book id
 
@@ -163,15 +164,15 @@ POST http://localhost:8080/readers/unban/67d7dba4ef41f60d84d7b30b
 Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJyb2xlcyI6IkFETUlOIiwic3ViIjoiZW1haWwyQGV4ZW1wbHUuY29tIiwiaWF0IjoxNzQyMjAwMDMyLCJleHAiOjE3NDIyMzYwMzJ9.D_mmNDvZXf8M5zjnRynZptjACvhoGtfkMxdurcA2Qc8
 
 // reserve book (you see the number you are at the que) (reader)
-POST http://localhost:8080/reserve/book?bookId=67d7ed255b85841f81f32548
-Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJyb2xlcyI6IlVTRVIiLCJzdWIiOiJlbWFpbDRAZXhlbXBsdS5jb20iLCJpYXQiOjE3NDIyMDYwMTEsImV4cCI6MTc0MjI0MjAxMX0.smyhN3Jy5_OUbCus0lUqlonBTwgbtBnJSLqOPu20wT8
+POST http://localhost:8080/reserve/book?bookId=67eaa3d834461b2005e64069
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJyb2xlcyI6IlVTRVIiLCJzdWIiOiJlbWFpbDJAZXhlbXBsdS5jb20iLCJpYXQiOjE3NDM0Mjk5NzcsImV4cCI6MTc0MzQ2NTk3N30.0LpW4uz9sQII8HW1_cEYRKDjQlup1pw4R_48ImxpbHA
 
 // unreserve book (reader)
 POST http://localhost:8080/reserve/unreserve?bookId=67d69d9e900fd079c81232d3
 Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJyb2xlcyI6IlVTRVIiLCJzdWIiOiJlbWFpbDIyQGV4ZW1wbHUuY29tIiwiaWF0IjoxNzQyMTMzNzMxLCJleHAiOjE3NDIxNjk3MzF9.iS7eTXbvjlZgA6mragmKCwjd-MPr0NNbHENb24eSmcU
 
 // see reserve list with bookid (admin)
-GET http://localhost:8080/reserve/list/67d7dd98ef41f60d84d7b30e
+GET http://localhost:8080/reserve/list/67eaa3d834461b2005e64069
 Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJyb2xlcyI6IkFETUlOIiwic3ViIjoiZW1haWwyQGV4ZW1wbHUuY29tIiwiaWF0IjoxNzQyMjAwMDMyLCJleHAiOjE3NDIyMzYwMzJ9.D_mmNDvZXf8M5zjnRynZptjACvhoGtfkMxdurcA2Qc8
 
 // see your reservations (reader)
