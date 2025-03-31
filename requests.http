@@ -86,7 +86,9 @@ POST http://localhost:8080/auth/login?email=emaillib@exemplu.com&password=parola
 //add book by librarian
 
 POST http://localhost:8080/books/add
-Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJyb2xlcyI6IkFETUlOIiwic3ViIjoiZW1haWxsaWJAZXhlbXBsdS5jb20iLCJpYXQiOjE3NDM0MjMxMjUsImV4cCI6MTc0MzQ1OTEyNX0.YXZ-eL4-PmrcOC86FNgcH1B37RUxilaRhnz0obOedms
+
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJyb2xlcyI6IkFETUlOIiwic3ViIjoiZW1haWxsaWJAZXhlbXBsdS5jb20iLCJpYXQiOjE3NDM0MzA0OTUsImV4cCI6MTc0MzQ2NjQ5NX0.qOMNMbjgqvyxBc3rlEvyNWhHNSJcha93BmDAII6BVWE
+
 Content-Type: application/json
 
 {
@@ -163,15 +165,15 @@ POST http://localhost:8080/readers/unban/67d7dba4ef41f60d84d7b30b
 Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJyb2xlcyI6IkFETUlOIiwic3ViIjoiZW1haWwyQGV4ZW1wbHUuY29tIiwiaWF0IjoxNzQyMjAwMDMyLCJleHAiOjE3NDIyMzYwMzJ9.D_mmNDvZXf8M5zjnRynZptjACvhoGtfkMxdurcA2Qc8
 
 // reserve book (you see the number you are at the que) (reader)
-POST http://localhost:8080/reserve/book?bookId=67d7ed255b85841f81f32548
-Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJyb2xlcyI6IlVTRVIiLCJzdWIiOiJlbWFpbDRAZXhlbXBsdS5jb20iLCJpYXQiOjE3NDIyMDYwMTEsImV4cCI6MTc0MjI0MjAxMX0.smyhN3Jy5_OUbCus0lUqlonBTwgbtBnJSLqOPu20wT8
+POST http://localhost:8080/reserve/book?bookId=67eaa3d834461b2005e64069
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJyb2xlcyI6IlVTRVIiLCJzdWIiOiJlbWFpbDJAZXhlbXBsdS5jb20iLCJpYXQiOjE3NDM0Mjk5NzcsImV4cCI6MTc0MzQ2NTk3N30.0LpW4uz9sQII8HW1_cEYRKDjQlup1pw4R_48ImxpbHA
 
 // unreserve book (reader)
 POST http://localhost:8080/reserve/unreserve?bookId=67d69d9e900fd079c81232d3
 Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJyb2xlcyI6IlVTRVIiLCJzdWIiOiJlbWFpbDIyQGV4ZW1wbHUuY29tIiwiaWF0IjoxNzQyMTMzNzMxLCJleHAiOjE3NDIxNjk3MzF9.iS7eTXbvjlZgA6mragmKCwjd-MPr0NNbHENb24eSmcU
 
 // see reserve list with bookid (admin)
-GET http://localhost:8080/reserve/list/67d7dd98ef41f60d84d7b30e
+GET http://localhost:8080/reserve/list/67eaa3d834461b2005e64069
 Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJyb2xlcyI6IkFETUlOIiwic3ViIjoiZW1haWwyQGV4ZW1wbHUuY29tIiwiaWF0IjoxNzQyMjAwMDMyLCJleHAiOjE3NDIyMzYwMzJ9.D_mmNDvZXf8M5zjnRynZptjACvhoGtfkMxdurcA2Qc8
 
 // see your reservations (reader)
