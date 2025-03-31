@@ -11,6 +11,7 @@ import java.util.List;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
 
 public class BookServiceTest {
@@ -77,21 +78,28 @@ public class BookServiceTest {
         assertEquals("New", result.get().getTitle());
     }
 
-    @Test
-    public void testDeleteBook_success() {
-        when(bookRepository.existsById("1")).thenReturn(true);
-        boolean result = bookService.deleteBook("1");
+  @Test
+public void testDeleteBook_success() {
+    Book book = new Book();
+    book.setId("1");
 
-        assertTrue(result);
-        verify(bookRepository).deleteById("1");
-    }
+    when(bookRepository.findById("1")).thenReturn(Optional.of(book));
 
-    @Test
-    public void testDeleteBook_notFound() {
-        when(bookRepository.existsById("1")).thenReturn(false);
-        boolean result = bookService.deleteBook("1");
+    boolean result = bookService.deleteBook("1");
 
-        assertFalse(result);
-        verify(bookRepository, never()).deleteById("1");
-    }
+    assertTrue(result);
+    verify(bookRepository).deleteById("1");
+}
+
+
+@Test
+public void testDeleteBook_notFound() {
+    when(bookRepository.findById("1")).thenReturn(Optional.empty());
+
+    boolean result = bookService.deleteBook("1");
+
+    assertFalse(result);
+    verify(bookRepository, never()).deleteById("1");
+}
+
 }

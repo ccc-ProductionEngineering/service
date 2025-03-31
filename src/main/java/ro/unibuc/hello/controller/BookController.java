@@ -36,14 +36,14 @@ public class BookController {
     }
 
     @PutMapping("/update/{id}")
-    public String updateBook(@PathVariable String id, @RequestBody Book bookDetails) {
+    public String updateBook(@PathVariable("id") String id, @RequestBody Book bookDetails) {
         return bookService.updateBook(id, bookDetails)
                 .map(book -> "Cartea a fost actualizata cu succes!")
                 .orElse("Cartea nu a fost gasita!");
     }
 
     @DeleteMapping("/delete/{id}")
-    public String deleteBook(@PathVariable String id)
+    public String deleteBook(@PathVariable("id") String id)
     {
         return bookService.deleteBook(id) ? "Cartea a fost stearsa cu succes!" : "Cartea nu a fost gasita!";
     }
