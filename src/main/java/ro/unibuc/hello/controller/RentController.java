@@ -27,7 +27,7 @@ public class RentController {
     private BookService bookService;
 
     @PostMapping("/rent")
-    public ResponseEntity<Rent> rentBook(@RequestParam String bookId, Authentication authentication) {
+    public ResponseEntity<Rent> rentBook(@RequestParam("bookId") String bookId, Authentication authentication) {
 
         if (authentication == null || !(authentication.getPrincipal() instanceof UserDetails)) {
             return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
@@ -65,7 +65,7 @@ public class RentController {
 
 
     @PostMapping("/return")
-    public ResponseEntity<Rent> returnBook(@RequestParam String bookId, Authentication authentication) {
+    public ResponseEntity<Rent> returnBook(@RequestParam("bookId") String bookId, Authentication authentication) {
 
         if (authentication == null || !(authentication.getPrincipal() instanceof UserDetails)) {
             return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
