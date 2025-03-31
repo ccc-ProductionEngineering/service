@@ -21,7 +21,7 @@ public class ReservationController {
 
     // Reserve a book
     @PostMapping("/book")
-    public ResponseEntity<String> reserveBook(@RequestParam String bookId, Authentication authentication) {
+    public ResponseEntity<String> reserveBook(@RequestParam("bookId") String bookId, Authentication authentication) {
         if (authentication == null || authentication.getName() == null) {
             return ResponseEntity.status(HttpStatus.FORBIDDEN).body("User not authenticated.");
         }
@@ -34,7 +34,7 @@ public class ReservationController {
 
     // Unreserve a book
     @PostMapping("/unreserve")
-    public ResponseEntity<String> unreserveBook(@RequestParam String bookId, Authentication authentication) {
+    public ResponseEntity<String> unreserveBook(@RequestParam("bookId") String bookId, Authentication authentication) {
         String readerId = authentication.getName();
         boolean success = reservationService.unreserveBook(bookId, readerId);
         if (success) {
@@ -45,7 +45,7 @@ public class ReservationController {
     }
 
     @GetMapping("/list/{bookId}")
-    public ResponseEntity<Object> getReservationList(@PathVariable String bookId) {
+    public ResponseEntity<Object> getReservationList(@PathVariable("bookId") String bookId) {
         Optional<Reservation> reservation = reservationService.getReservationByBookId(bookId);
     
         return reservation

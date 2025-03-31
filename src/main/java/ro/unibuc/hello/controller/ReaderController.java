@@ -46,7 +46,7 @@ public class ReaderController {
     // 5. Unban un utilizator
     @PreAuthorize("hasRole('ADMIN')")
     @PostMapping("/unban/{id}")
-    public String unbanReader(@PathVariable String id) {
+    public String unbanReader(@PathVariable("id") String id) {
         return readerService.unbanReader(id) ? "Utilizatorul a fost debanat cu succes!" : "Utilizatorul nu a fost gasit!";
     }
 
