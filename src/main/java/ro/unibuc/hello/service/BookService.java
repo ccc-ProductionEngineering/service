@@ -46,10 +46,14 @@ public class BookService {
 
     // delete a book
     public boolean deleteBook(String id) {
-        if (bookRepository.existsById(id)) {
+        Optional<Book> optionalBook = bookRepository.findById(id);
+        if (optionalBook.isPresent()) {
             bookRepository.deleteById(id);
             return true;
+        } else {
+            System.out.println("Carte cu id inexistent: " + id);
+            return false;
         }
-        return false;
     }
-}
+    
+    }
