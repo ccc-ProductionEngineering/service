@@ -15,7 +15,6 @@ public class NoSecurityConfig {
     @Bean
     public SecurityFilterChain testSecurityFilterChain(HttpSecurity http) throws Exception {
         http
-            .securityMatcher("/books/**", "/reserve/**")
             .csrf().disable()
             .authorizeHttpRequests(auth -> auth.anyRequest().permitAll());
         return http.build();
