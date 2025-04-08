@@ -42,12 +42,7 @@ public class BookControllerIntegrationTest {
         mongoDBContainer.start(); 
     }
 
-    @DynamicPropertySource
-    static void setProperties(DynamicPropertyRegistry registry) {
-        String uri = mongoDBContainer.getReplicaSetUrl();
-        registry.add("mongodb.connection.url", () -> uri);
-        registry.add("spring.data.mongodb.uri", () -> uri);
-    }
+    
 
     @Autowired
     private MockMvc mockMvc;
