@@ -28,7 +28,7 @@ pipeline {
             IMAGE_TAG = "${MAJOR_VERSION}.${NEW_MINOR}.${PATCH_VERSION}"
 
             sh "docker build -t saicucarina23/hello-img:${IMAGE_TAG} ."
-            sh "echo \$DOCKER_PASSWORD | docker login -u saicucarina23 --password-stdin"
+            sh "docker login -u saicucarina23 -p ${DOCKER_PASSWORD_PSW}"
             sh "docker push saicucarina23/hello-img:${IMAGE_TAG}"
         }
     }
