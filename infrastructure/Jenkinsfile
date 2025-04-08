@@ -21,18 +21,19 @@ pipeline {
             MAJOR_VERSION = sh([script: 'git tag | cut -d . -f 1', returnStdout: true]).trim()
             MINOR_VERSION = sh([script: 'git tag | cut -d . -f 2', returnStdout: true]).trim()
             PATCH_VERSION = sh([script: 'git tag | cut -d . -f 3', returnStdout: true]).trim()
-            IMAGE_TAG = "${MAJOR_VERSION}.$((MINOR_VERSION + 1)).${PATCH_VERSION}"
+
+            // Calculezi noua versiune minoră în shell
+            NEW_MINOR = sh(script: "expr ${MINOR_VERSION} + 1", returnStdout: true).trim()
+
+            IMAGE_TAG = "${MAJOR_VERSION}.${NEW_MINOR}.${PATCH_VERSION}"
 
             sh "docker build -t saicucarina23/hello-img:${IMAGE_TAG} ."
-
-            // Login to DockerHub
             sh "echo \$DOCKER_PASSWORD | docker login -u saicucarina23 --password-stdin"
-
-            // Push image
             sh "docker push saicucarina23/hello-img:${IMAGE_TAG}"
         }
     }
 }
+
 
     }
 }
