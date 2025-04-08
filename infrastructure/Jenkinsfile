@@ -22,7 +22,11 @@ pipeline {
             MINOR_VERSION = sh([script: 'git tag | cut -d . -f 2', returnStdout: true]).trim()
             PATCH_VERSION = sh([script: 'git tag | cut -d . -f 3', returnStdout: true]).trim()
         }
-        sh "docker build -t saicucarina23/hello-img:${MAJOR_VERSION}.\$((${MINOR_VERSION} + 1)).${PATCH_VERSION} ."
+        sh "docker build -t ${DOCKER_CREDENTIALS_USR}/hello-img:${IMAGE_TAG} ."
+        sh "echo ${DOCKER_CREDENTIALS_PSW} | docker login -u ${DOCKER_CREDENTIALS_USR} --password-stdin"
+        sh "docker push ${DOCKER_CREDENTIALS_USR}/hello-img:${IMAGE_TAG}"
+        sh "git tag ${IMAGE_TAG}"
+        sh "git push https://${GITHUB_TOKEN}@github.com/ccc-ProductionEngineering/service.git ${IMAGE_TAG}"
       }
 }
     }
