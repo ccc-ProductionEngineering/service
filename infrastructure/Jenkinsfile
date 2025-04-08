@@ -14,16 +14,24 @@ pipeline {
             }
         }
         stage('Tag image') {
-      steps {
+    steps {
         script {
             GIT_TAG = sh([script: 'git fetch --tag && git tag', returnStdout: true]).trim()
             MAJOR_VERSION = sh([script: 'git tag | cut -d . -f 1', returnStdout: true]).trim()
             MINOR_VERSION = sh([script: 'git tag | cut -d . -f 2', returnStdout: true]).trim()
             PATCH_VERSION = sh([script: 'git tag | cut -d . -f 3', returnStdout: true]).trim()
-        }
-        sh "docker build -t cosminbalaita/hello-img:${MAJOR_VERSION}.\$((${MINOR_VERSION} + 1)).${PATCH_VERSION} ."
-       
-      }
+
+            // Calculezi noua versiune minoră în shell
+            NEW_MINOR = sh(script: "expr ${MINOR_VERSION} + 1", returnStdout: true).trim()
+
+            IMAGE_TAG = "${MAJOR_VERSION}.${NEW_MINOR}.${PATCH_VERSION}"
+
+            sh "docker build -t cosminbalaita/hello-img:${IMAGE_TAG} ."
+            sh "docker login -u cosminbalaita -p Cosmindocker2003"
+            sh "docker push cosminbalaita/hello-img:${IMAGE_TAG}"
+        }
+    }
+}
 }
     }
 }
