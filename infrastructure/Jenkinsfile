@@ -5,6 +5,8 @@ pipeline {
     }
     environment {
         DOCKER_PASSWORD = credentials("docker_password")
+        DOCKER_CREDENTIALS = credentials("DockerHub") 
+        GITHUB_TOKEN = credentials("github_token")
     }
 
     stages {
