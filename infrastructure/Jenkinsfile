@@ -22,17 +22,19 @@ pipeline {
             MINOR_VERSION = sh([script: 'git tag | cut -d . -f 2', returnStdout: true]).trim()
             PATCH_VERSION = sh([script: 'git tag | cut -d . -f 3', returnStdout: true]).trim()
 
-            // Calculezi noua versiune minoră în shell
             NEW_MINOR = sh(script: "expr ${MINOR_VERSION} + 1", returnStdout: true).trim()
 
             IMAGE_TAG = "${MAJOR_VERSION}.${NEW_MINOR}.${PATCH_VERSION}"
 
-            sh "docker build -t saicucarina23/hello-img:${IMAGE_TAG} ."
-            sh "docker login -u saicucarina23 -p 23Carina2002"
-            sh "docker push saicucarina23/hello-img:${IMAGE_TAG}"
+            sh "docker build -t cosminbalaita/hello-img:${IMAGE_TAG} ."
+            sh "docker login -u cosminbalaita -p Cosmin2003"
+            sh "docker push cosminbalaita/hello-img:${IMAGE_TAG}"
         }
     }
 }
+
+
+
 
 
     }
