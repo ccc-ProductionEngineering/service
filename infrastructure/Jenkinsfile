@@ -31,13 +31,13 @@ pipeline {
                     // sh "docker build -t corinaa/hello-img:${IMAGE_TAG} ."
                     // sh "docker login -u corinaa -p Corina2002!"
                     // sh "docker push corinaa/hello-img:${IMAGE_TAG}"
-                        sh([script: 'git fetch --tag', returnStdout: true]).trim()
-                        env.MAJOR_VERSION = sh([script: 'git tag | sort --version-sort | tail -1 | cut -d . -f 1', returnStdout: true]).trim()
-                        env.MINOR_VERSION = sh([script: 'git tag | sort --version-sort | tail -1 | cut -d . -f 2', returnStdout: true]).trim()
-                        env.PATCH_VERSION = sh([script: 'git tag | sort --version-sort | tail -1 | cut -d . -f 3', returnStdout: true]).trim()
-                        env.IMAGE_TAG = "${env.MAJOR_VERSION}.\$((${env.MINOR_VERSION} + 1)).${env.PATCH_VERSION}"
-                        sh "git tag ${env.IMAGE_TAG}"
-                        sh "git push https://$GITHUB_TOKEN@github.com/${DOCKER_PASSWORD_USR}/service.git ${env.IMAGE_TAG}"
+                    sh([script: 'git fetch --tag', returnStdout: true]).trim()
+                    env.MAJOR_VERSION = sh([script: 'git tag | sort --version-sort | tail -1 | cut -d . -f 1', returnStdout: true]).trim()
+                    env.MINOR_VERSION = sh([script: 'git tag | sort --version-sort | tail -1 | cut -d . -f 2', returnStdout: true]).trim()
+                    env.PATCH_VERSION = sh([script: 'git tag | sort --version-sort | tail -1 | cut -d . -f 3', returnStdout: true]).trim()
+                    env.IMAGE_TAG = "${env.MAJOR_VERSION}.\$((${env.MINOR_VERSION} + 1)).${env.PATCH_VERSION}"
+                    sh "git tag ${env.IMAGE_TAG}"
+                    sh "git push https://$GITHUB_TOKEN@github.com/${DOCKER_PASSWORD_USR}/service.git ${env.IMAGE_TAG}"
                 }
             }
         }
