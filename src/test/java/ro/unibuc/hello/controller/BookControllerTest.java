@@ -6,6 +6,7 @@ import org.junit.jupiter.api.Test;
 import ro.unibuc.hello.data.Book;
 import ro.unibuc.hello.repository.BookRepository;
 import ro.unibuc.hello.service.BookService;
+import io.micrometer.core.instrument.simple.SimpleMeterRegistry;
 
 import java.util.List;
 import java.util.Optional;
@@ -19,10 +20,15 @@ public class BookControllerTest {
     private BookController bookController;
 
     @BeforeEach
-    public void setUp() {
-        bookService = mock(BookService.class);
-        bookController = new BookController(mock(BookRepository.class), bookService);
-    }
+public void setUp() {
+    bookService = mock(BookService.class);
+    SimpleMeterRegistry meterRegistry = new SimpleMeterRegistry();
+    bookController = new BookController(
+        mock(BookRepository.class),
+        bookService,
+        meterRegistry
+    );
+}
 
     @Test
     public void testAddBook() {
@@ -30,7 +36,7 @@ public class BookControllerTest {
         when(bookService.addBook(book)).thenReturn(book);
 
         String result = bookController.addBook(book);
-        assertEquals("Cartea a fost adăugată cu succes!", result);
+        assertEquals("Cartea a fost adaugata cu succes!", result);
     }
 
     @Test
