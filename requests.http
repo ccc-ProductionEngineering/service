@@ -86,7 +86,7 @@ POST http://localhost:8080/auth/login?email=emaillib2@exemplu.com&password=parol
 //add book by librarian
 
 POST http://localhost:8080/books/add
-Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJyb2xlcyI6IkFETUlOIiwic3ViIjoiZW1haWxsaWIyQGV4ZW1wbHUuY29tIiwiaWF0IjoxNzQzNDQ2NjMwLCJleHAiOjE3NDM0ODI2MzB9.wbB6vTUZjT4cp4bCWFmn4Z_KU5TWLtAW7Fo3reRkWFI
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJyb2xlcyI6IkFETUlOIiwic3ViIjoiZW1haWxsaWIyQGV4ZW1wbHUuY29tIiwiaWF0IjoxNzQ1OTE0NjcyLCJleHAiOjE3NDU5NTA2NzJ9.B5e1mCVrHG2G1HYih1W6XoyW0F0CSzXgt9d8pfCF4S0
 Content-Type: application/json
 
 {
@@ -120,8 +120,7 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJyb2xlcyI6IlVTRVIiLCJzdWIiOiJlbWFpb
 
 //get all books
 GET http://localhost:8080/books/all
-Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJyb2xlcyI6IkFETUlOIiwic3ViIjoiZW1haWwyQGV4ZW1wbHUuY29tIiwiaWF0IjoxNzQyMjAwMDMyLCJleHAiOjE3NDIyMzYwMzJ9.D_mmNDvZXf8M5zjnRynZptjACvhoGtfkMxdurcA2Qc8
-
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJyb2xlcyI6IkFETUlOIiwic3ViIjoiZW1haWxsaWIyQGV4ZW1wbHUuY29tIiwiaWF0IjoxNzQ1OTEzMzU5LCJleHAiOjE3NDU5NDkzNTl9.YMVreA9c-0rIFx8tMaG0FTfwdRi05h-JpiourV9Ne1I
 //update book by id
 PUT http://localhost:8080/books/update/67d7dc2def41f60d84d7b30d
 Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJyb2xlcyI6IkFETUlOIiwic3ViIjoiZW1haWwyQGV4ZW1wbHUuY29tIiwiaWF0IjoxNzQyMjAwMDMyLCJleHAiOjE3NDIyMzYwMzJ9.D_mmNDvZXf8M5zjnRynZptjACvhoGtfkMxdurcA2Qc8
