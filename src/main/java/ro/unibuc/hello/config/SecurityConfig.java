@@ -35,7 +35,7 @@ public class SecurityConfig {
                 //     auth.anyRequest().authenticated();
                 // })
                 .authorizeHttpRequests(auth -> auth
-                .requestMatchers("/auth/**", "/hello-world", "/availabletitle","/actuator/**").permitAll()
+                .requestMatchers("/auth/**", "/hello-world", "/availabletitle","/actuator/**","/monitoring/**").permitAll()
                 .requestMatchers("/books/add", "/books/all", "/books/update", "/books/delete", "/readers/all","/readers/borrowers","/readers/late","/readers/ban-late","/readers/banned","readers/un-ban").hasRole("ADMIN")
                 .requestMatchers("/rent", "/return/**").hasRole("USER")
                 .requestMatchers("/reserve/book", "/reserve/unreserve").hasRole("USER")
