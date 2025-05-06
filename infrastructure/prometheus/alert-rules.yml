@@ -1,0 +1,43 @@
+groups:
+  - name: lab9-alerts
+    rules:
+      - alert: AppDown
+        expr: increase(app_availability_up[1m]) < 1
+        for: 1m
+        labels:
+          severity: critical
+        annotations:
+          summary: "App seems to be down"
+          
+      - alert: SlowResponse
+        expr: histogram_quantile(0.95, rate(app_performance_response_time_seconds_bucket[1m])) > 0.5
+        for: 1m
+        labels:
+          severity: warning
+        annotations:
+          summary: "95% of requests are slower than 0.5s"
+          
+      - alert: HighErrorRate
+        expr: increase(app_quality_error_rate_total[1m]) > 5
+        for: 1m
+        labels:
+          severity: warning
+        annotations:
+          summary: "Too many errors detected"
+
+      - alert : TestEmailAlert
+        expr: vector(1)  
+        for: 10s
+        labels:
+          severity: critical
+        annotations:
+          summary: "Test alert triggered intentionally"
+      
+      - alert: High403Rate
+        expr: increase(http_403_responses_total[1m]) > 3
+        for: 30s
+        labels:
+          severity: warning
+        annotations:
+          summary: "Excessive 403 responses"
+          description: "Service returned more than 3 HTTP 403 errors in the last minute"

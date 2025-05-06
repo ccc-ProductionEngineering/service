@@ -86,7 +86,7 @@ POST http://localhost:8080/auth/login?email=emaillib2@exemplu.com&password=parol
 //add book by librarian
 
 POST http://localhost:8080/books/add
-Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJyb2xlcyI6IkFETUlOIiwic3ViIjoiZW1haWxsaWIyQGV4ZW1wbHUuY29tIiwiaWF0IjoxNzQ1OTE0NjcyLCJleHAiOjE3NDU5NTA2NzJ9.B5e1mCVrHG2G1HYih1W6XoyW0F0CSzXgt9d8pfCF4S0
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJyb2xlcyI6IkFETUlOIiwic3ViIjoiZW1haWxsaWIyQGV4ZW1wbHUuY29tIiwiaWF0IjoxNzQ2NTE2Mjk5LCJleHAiOjE3NDY1NTIyOTl9.kI9hqCCrucHr03EMG8D54NOoLZRHyK314RS-psOorMg
 Content-Type: application/json
 
 {
